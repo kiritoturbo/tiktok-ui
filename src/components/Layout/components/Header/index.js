@@ -3,8 +3,9 @@ import classNames from 'classnames/bind';
 import styles from './Header.module.scss'
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleXmark, faSpinner,faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faCircleXmark, faSpinner,faSearch, faSignIn } from '@fortawesome/free-solid-svg-icons';
 
+import Button from '~/components/Button';
 import Tippy from '@tippyjs/react/headless'; // different import path!s
 import AccountItem from '~/components/AccountItem';
 
@@ -76,7 +77,24 @@ function Header() {
                     </button>
                 </div>
            </Tippy>
-            <div className={cx('actions')}></div>
+            <div className={cx('actions')}>
+                <Button text>Upload</Button>
+                <Button 
+                    primary 
+                    // leftIcon={<FontAwesomeIcon icon={faSignIn} />}
+                    // disabled
+                    // rounded
+                    // outline className={cx('custom-login')}
+                    // small
+                    // large
+                    // to='/login'
+                    // href='https://www.tiktok.com/'
+                    // target='_blank'
+                    // onClick={()=>alert("Thành công")}
+                >
+                    Login
+                </Button>
+            </div>
         </div>
     </header>;
 }
