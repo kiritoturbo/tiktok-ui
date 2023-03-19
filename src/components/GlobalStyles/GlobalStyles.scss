@@ -1,5 +1,5 @@
 @import 'normalize.css';
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700&display=swap');
 
 :root{
     --primary-color:#fe2c55;
@@ -13,6 +13,44 @@
     --white:#fff;
 }
 
+///fonts embeded
+
+@font-face {
+    font-family: ProximaNova;
+    src: url('/assets/Fonts/Proxima-Nova-Regular.woff2');
+    font-weight: 400;
+
+}
+
+@font-face {
+    font-family: ProximaNova;
+    src: url('/assets/Fonts/Proxima-Nova-Semibold.woff2');
+    font-weight: 600;
+
+}
+
+@font-face {
+    font-family: SofiaPro,;
+    src: url('/assets/Fonts/sofiapro-bold.woff2');
+    font-weight: 700;
+
+}
+
+@font-face {
+    font-family: ProximaNova;
+    src: url('/assets/Fonts/Proxima-Nova-Bold.woff2');
+    font-weight: 700;
+
+}
+
+@font-face {
+    font-family: ProximaNova;
+    src: url('/assets/Fonts/Proxima-Nova-Bold.woff2');
+    font-weight: 700;
+
+}
+
+
 *{
     box-sizing: border-box;
     margin: 0;
@@ -25,7 +63,7 @@ html{
 }
 
 body{
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'ProximaNova', sans-serif;
     font-size: 1.6rem;
     line-height: 1.5;
     text-rendering: optimizeSpeed;//tối ưu tốc độ hiển thị phônng

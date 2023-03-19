@@ -12,6 +12,8 @@ import AccountItem from '~/components/AccountItem';
 import Menu from '~/components/Popper/Menu';
 import 'tippy.js/dist/tippy.css';
 import { faArrowAltCircleLeft } from '@fortawesome/free-regular-svg-icons';
+import { UploadIcon } from '~/components/Icons';
+import Image from '~/components/Image';
 
 
 const cx = classNames.bind(styles);//hỗ trợ viết class có dấu gạch ngang kiểu post-item
@@ -204,7 +206,9 @@ function Header() {
                         placement='bottom'
                     >
                         <button className={cx('action-btn')}>
-                            <FontAwesomeIcon icon={faCloudArrowUp}/>
+                            {/* <FontAwesomeIcon icon={faCloudArrowUp}/> */}
+                            
+                            <UploadIcon/>
                         </button>
                     </Tippy>
 
@@ -260,10 +264,11 @@ function Header() {
             )}
                     <Menu items={currentUser ? userMenu :MENU_ITEMS} onChange={handleMenuChage}>
                         {currentUser?(
-                            <img 
+                            <Image
                                 className={cx('user-avatar')} 
                                 src="https://scontent.fhan14-2.fna.fbcdn.net/v/t39.30808-6/274348158_712682196766452_7462369539506109373_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=qK2sdjnIDKwAX8VIeTC&_nc_ht=scontent.fhan14-2.fna&oh=00_AfBWusLDLwbpoMUW_NR4TB1ajDFTXaxVuYRGZBfG5VR1wg&oe=641C09BD" 
                                 alt="Nguyễn Văn Trường"
+                                fallback=""
                             />
                         ):(
                             <button className={cx('more-btn')}>
