@@ -3,12 +3,15 @@ import classNames from 'classnames/bind';
 import styles from './Header.module.scss'
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleXmark, faSpinner,faSearch, faSignIn, faEllipsisVertical, faEarthAsia, faQuestion, faKeyboard } from '@fortawesome/free-solid-svg-icons';
+import { faCircleXmark, faSpinner,faSearch, faSignIn, faEllipsisVertical, faEarthAsia, faQuestion, faKeyboard, faCloudArrowUp, faMessage, faUser, faCoins, faGear, faArrowCircleRight, faSignOut } from '@fortawesome/free-solid-svg-icons';
 
 import Button from '~/components/Button';
-import Tippy from '@tippyjs/react/headless'; // different import path!s
+import Tippy from '@tippyjs/react'; // different import path!s
+import HeadlessTippy from '@tippyjs/react/headless'; // different import path!s
 import AccountItem from '~/components/AccountItem';
 import Menu from '~/components/Popper/Menu';
+import 'tippy.js/dist/tippy.css';
+import { faArrowAltCircleLeft } from '@fortawesome/free-regular-svg-icons';
 
 
 const cx = classNames.bind(styles);//hỗ trợ viết class có dấu gạch ngang kiểu post-item
@@ -86,6 +89,9 @@ const MENU_ITEMS=[
 function Header() {
     const [searchResult, setSearchResult] = useState([]);
 
+    const currentUser =true;
+
+
     //Handles logic
     const handleMenuChage=(menuItem)=>{
         // console.log(menuItem);
@@ -97,11 +103,39 @@ function Header() {
         }
     }
 
+
+    const userMenu = [
+        {
+            icon: <FontAwesomeIcon icon={faUser}/>,
+            title:"View profile",
+            to:'/@trường'
+        },
+        {
+            icon: <FontAwesomeIcon icon={faCoins}/>,
+            title:"Get coins",
+            to:'/coin'
+        },
+        {
+            icon: <FontAwesomeIcon icon={faGear}/>,
+            title:"Settings",
+            to:'/settings'
+        },
+        ...MENU_ITEMS,
+        {
+            icon: <FontAwesomeIcon icon={faSignOut}/>,
+            title:"Logout",
+            to:'/logout',
+            separate:true
+        },
+    ]
+
     useEffect(()=>{
         setTimeout(() => {
             setSearchResult([]);
         },3000)
     },[])
+
+
 
     return <header className={cx('wrapper')}>
         <div className={cx('inner')}>
@@ -126,7 +160,7 @@ function Header() {
 
 
 
-           <Tippy
+           <HeadlessTippy
                 interactive
                 visible={searchResult.length > 0}
                 render={(attrs)=>(
@@ -158,58 +192,89 @@ function Header() {
                         <FontAwesomeIcon icon={faSearch} />
                     </button>
                 </div>
-           </Tippy>
-            <div className={cx('actions')}>
-                <Button text>Upload</Button>
-                <Button 
-                    primary 
-                    // leftIcon={<FontAwesomeIcon icon={faSignIn} />}
-                    // disabled
-                    // rounded
-                    // outline className={cx('custom-login')}
-                    // small
-                    // large
-                    // to='/login'
-                    // href='https://www.tiktok.com/'
-                    // target='_blank'
-                    // onClick={()=>alert("Thành công")}
-                >
-                    Login
-                </Button>
+           </HeadlessTippy>
+
+           <div className={cx('actions')}>
+           {currentUser?(
+                <>
+                    <Tippy 
+                        // trigger='click' 
+                        delay={[0,200]}
+                        content="Upload video" 
+                        placement='bottom'
+                    >
+                        <button className={cx('action-btn')}>
+                            <FontAwesomeIcon icon={faCloudArrowUp}/>
+                        </button>
+                    </Tippy>
 
 
+                </>
+           ):(
+                <>
+                    <Button text>Upload</Button>
+                    <Button 
+                        primary 
+                        // leftIcon={<FontAwesomeIcon icon={faSignIn} />}
+                        // disabled
+                        // rounded
+                        // outline className={cx('custom-login')}
+                        // small
+                        // large
+                        // to='/login'
+                        // href='https://www.tiktok.com/'
+                        // target='_blank'
+                        // onClick={()=>alert("Thành công")}
+                    >
+                        Login
+                    </Button>
+    
+    
+    
+                    {/* <Tippy
+                        interactive
+                        // visible
+                        placement='bottom-end'
+                        render={(attrs)=>(
+                            <div className={cx('menu-items')} tabIndex="-1" {...attrs}>
+                                    <PopperWrapper>
+                                        <h4 className={cx('search-title')}>
+                                            Accounts
+                                        </h4>
+                                        <AccountItem/>
+                                        <AccountItem/>
+                                        <AccountItem/>
+                                        <AccountItem/>
+                                    </PopperWrapper>
+                                </div>
+                        )}
+                    >
+                        <button className={cx('more-btn')}>
+                            <FontAwesomeIcon icon={faEllipsisVertical} />
+                        </button>
+                    </Tippy> */}
+                    
+                </>
 
-            {/* <Tippy
-                interactive
-                // visible
-                placement='bottom-end'
-                render={(attrs)=>(
-                    <div className={cx('menu-items')} tabIndex="-1" {...attrs}>
-                            <PopperWrapper>
-                                <h4 className={cx('search-title')}>
-                                    Accounts
-                                </h4>
-                                <AccountItem/>
-                                <AccountItem/>
-                                <AccountItem/>
-                                <AccountItem/>
-                            </PopperWrapper>
-                        </div>
-                )}
-            >
-                <button className={cx('more-btn')}>
-                    <FontAwesomeIcon icon={faEllipsisVertical} />
-                </button>
-            </Tippy> */}
-            <Menu items={MENU_ITEMS} onChange={handleMenuChage}>
-                <button className={cx('more-btn')}>
-                    <FontAwesomeIcon icon={faEllipsisVertical} />
-                </button>
-            </Menu>
+
+            )}
+                    <Menu items={currentUser ? userMenu :MENU_ITEMS} onChange={handleMenuChage}>
+                        {currentUser?(
+                            <img 
+                                className={cx('user-avatar')} 
+                                src="https://scontent.fhan14-2.fna.fbcdn.net/v/t39.30808-6/274348158_712682196766452_7462369539506109373_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=qK2sdjnIDKwAX8VIeTC&_nc_ht=scontent.fhan14-2.fna&oh=00_AfBWusLDLwbpoMUW_NR4TB1ajDFTXaxVuYRGZBfG5VR1wg&oe=641C09BD" 
+                                alt="Nguyễn Văn Trường"
+                            />
+                        ):(
+                            <button className={cx('more-btn')}>
+                            <FontAwesomeIcon icon={faEllipsisVertical} />
+                        </button>
+                        )}
+                        
+                    </Menu>
             </div>
-
-
         </div>
+                    
     </header>;
 }
 
