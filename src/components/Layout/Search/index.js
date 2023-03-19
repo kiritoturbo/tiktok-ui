@@ -19,6 +19,7 @@ function Search() {
     const[searchValue, setSearchValue] = useState('');
     const [searchResult, setSearchResult] = useState([]);
     const[showResults, setShowResults]=useState(true);
+    const[loading, setLoading]=useState(false);
 
     const inputRef = useRef();
 
@@ -34,10 +35,30 @@ function Search() {
     }
     
     useEffect(()=>{
-        setTimeout(() => {
-            setSearchResult([1]);
-        },3000)
-    },[])
+        // setTimeout(() => {
+        //     setSearchResult([1]);
+        // },3000)
+        
+        if(!searchValue.trim()){
+        setSearchResult([])
+
+            return
+        }
+        setLoading(true)
+        fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(searchValue)}&type=less`)
+        //encodeURIComponent để mã hóa kí từ nhập vào để ko bị trùng vs kí tự bên backend ví dụ như ?,=
+            .then((res)=>res.json())
+            .then(res=>{
+                setSearchResult(res.data);
+                setLoading(false)
+
+            })
+            .catch(()=>{
+                setLoading(false)
+            })
+
+
+    },[searchValue])
     return ( 
         <HeadlessTippy
         interactive
@@ -48,10 +69,10 @@ function Search() {
                         <h4 className={cx('search-title')}>
                             Accounts
                         </h4>
-                        <AccountItem/>
-                        <AccountItem/>
-                        <AccountItem/>
-                        <AccountItem/>
+                        {searchResult.map(result=>(
+                            <AccountItem key={result.id} data={result}/>
+                        ))}
+                        
                     </PopperWrapper>
                 </div>
         )}
@@ -63,10 +84,16 @@ function Search() {
                 value={searchValue}
                 placeholder='Search accounts and videos ' 
                 spellCheck={false} 
-                onChange={(e)=>setSearchValue(e.target.value)}
+                onChange={(e)=>{
+                    if(e.target.value.startsWith(' ')){//ngăn ko cho người dùng nhập phím cách đầu tiên
+                        setSearchValue('')
+                    }else{
+                        setSearchValue(e.target.value)
+                    }
+                }}
                 onFocus={()=>setShowResults(true)}
             />
-            {!!searchValue && (
+            {!!searchValue && !loading && (
                 <button className={cx('clear')} onClick={()=>{
                     // setSearchValue(' ') //làm trống ô text
                     // inputRef.current.focus();//focus trong ô input
@@ -76,7 +103,7 @@ function Search() {
                 </button>
             )}
 
-            {/* <FontAwesomeIcon icon={faSpinner} className={cx('loading')} /> */}
+            {loading && <FontAwesomeIcon icon={faSpinner} className={cx('loading')} />}
             {/* loading  */}
 
             
