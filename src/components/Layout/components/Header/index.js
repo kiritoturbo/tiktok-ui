@@ -17,7 +17,60 @@ const MENU_ITEMS=[
     {
         icon: <FontAwesomeIcon icon={faEarthAsia}/>,
         title:"English",
-
+        children:{
+            title:'Language',
+            data:[
+                {
+                    type:'language',
+                    code:'en',
+                    title:'English',
+                    
+                },
+                {
+                    type:'language',
+                    code:'vi',
+                    title:'Tiếng Việt',
+                    children:{
+                        title:'Language',
+                        data:[
+                            {
+                                code:'en',
+                                title:'English11111',
+                                
+                            },
+                            {
+                                code:'vi',
+                                title:'Tiếng Việt111111',
+                            },
+                            {
+                                code:'en ',
+                                title:'English11111',
+                            },
+                            {
+                                code:'en',
+                                title:'English211111',
+                            },
+                            {
+                                code:'en',
+                                title:'English3111111',
+                            },
+                        ]
+                    }
+                },
+                {
+                    code:'en ',
+                    title:'English1',
+                },
+                {
+                    code:'en',
+                    title:'English2',
+                },
+                {
+                    code:'en',
+                    title:'English3',
+                },
+            ]
+        }
     },
     {
         icon: <FontAwesomeIcon icon={faQuestion}/>,
@@ -32,6 +85,17 @@ const MENU_ITEMS=[
 
 function Header() {
     const [searchResult, setSearchResult] = useState([]);
+
+    //Handles logic
+    const handleMenuChage=(menuItem)=>{
+        // console.log(menuItem);
+        switch(menuItem.type){
+            case 'language':
+                //handle change language
+                break
+            default:
+        }
+    }
 
     useEffect(()=>{
         setTimeout(() => {
@@ -137,7 +201,7 @@ function Header() {
                     <FontAwesomeIcon icon={faEllipsisVertical} />
                 </button>
             </Tippy> */}
-            <Menu items={MENU_ITEMS}>
+            <Menu items={MENU_ITEMS} onChange={handleMenuChage}>
                 <button className={cx('more-btn')}>
                     <FontAwesomeIcon icon={faEllipsisVertical} />
                 </button>
