@@ -5,6 +5,7 @@ import { faCircleXmark, faSpinner,faSearch, faSignIn, faEllipsisVertical, faEart
 import HeadlessTippy from '@tippyjs/react/headless'; // different import path!s
 import AccountItem from '~/components/AccountItem';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useDebounce } from '~/hooks';
 
 import classNames from 'classnames/bind';
 import styles from './Search.module.scss'
@@ -20,6 +21,9 @@ function Search() {
     const [searchResult, setSearchResult] = useState([]);
     const[showResults, setShowResults]=useState(true);
     const[loading, setLoading]=useState(false);
+
+
+    const debounced = useDebounce(searchValue,500)
 
     const inputRef = useRef();
 
@@ -39,13 +43,13 @@ function Search() {
         //     setSearchResult([1]);
         // },3000)
         
-        if(!searchValue.trim()){
+        if(!debounced.trim()){
         setSearchResult([])
 
             return
         }
         setLoading(true)
-        fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(searchValue)}&type=less`)
+        fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debounced)}&type=less`)
         //encodeURIComponent để mã hóa kí từ nhập vào để ko bị trùng vs kí tự bên backend ví dụ như ?,=
             .then((res)=>res.json())
             .then(res=>{
@@ -58,7 +62,7 @@ function Search() {
             })
 
 
-    },[searchValue])
+    },[debounced])
     return ( 
         <HeadlessTippy
         interactive
