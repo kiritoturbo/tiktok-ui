@@ -30,7 +30,11 @@ function Search() {
 
     const handleHideResults=()=>{
         setShowResults(false);
+        
     }
+
+
+ 
 
     const handleClear=()=>{
         // setSearchValue(' ') //làm trống ô text
@@ -113,7 +117,7 @@ function Search() {
             {/* loading  */}
 
             
-            <button className={cx('search-btn')}>
+            <button className={cx('search-btn')} onMouseDown={e=>e.preventDefault()}>
                 {/* search  */}
                 <FontAwesomeIcon icon={faSearch} />
             </button>
