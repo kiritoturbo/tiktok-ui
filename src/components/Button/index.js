@@ -1,10 +1,26 @@
 import classNames from "classnames/bind";
 import { Link } from "react-router-dom";
 import styles from './Button.module.scss'
-
+import PropTypes from 'prop-types'
 const cx = classNames.bind(styles);
 
-function Button({to,disabled=false,href,text=false,leftIcon,rightIcon,rounded,className, primary=false,children,large=false, outline=false ,small=false, onClick,...passProps}) {
+function Button({
+        to,
+        disabled=false,
+        href,
+        text=false,
+        leftIcon,
+        rightIcon,
+        rounded,
+        className, 
+        primary=false,
+        children,
+        large=false, 
+        outline=false ,
+        small=false, 
+        onClick,
+        ...passProps
+    }) {
     let Comp='button';//Comp viết tắt của component
     const props={
         onClick,
@@ -50,6 +66,23 @@ function Button({to,disabled=false,href,text=false,leftIcon,rightIcon,rounded,cl
 
         </Comp>
      );
+}
+
+Button.propTypes={
+    to:PropTypes.string,
+    disabled:PropTypes.bool,
+    href:PropTypes.string,
+    text:PropTypes.bool,
+    leftIcon:PropTypes.node,
+    rightIcon:PropTypes.node,
+    rounded:PropTypes.bool,
+    className:PropTypes.string,
+    primary:PropTypes.bool,
+    children:PropTypes.node.isRequired,
+    large:PropTypes.bool,
+    outline:PropTypes.bool,
+    small:PropTypes.bool,
+    onClick:PropTypes.func,
 }
 
 export default Button;

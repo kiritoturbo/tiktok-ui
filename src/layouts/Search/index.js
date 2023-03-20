@@ -77,7 +77,7 @@ function Search() {
         //thêm thẻ div để tránh warnning của tippy
     <div>
         <HeadlessTippy
-            appendTo={()=>document.body}
+            // appendTo={()=>//document.body}
             interactive
             visible={showResults && searchResult.length > 0}
             render={(attrs)=>(
