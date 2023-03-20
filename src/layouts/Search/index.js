@@ -1,6 +1,6 @@
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import { useEffect, useState, useRef } from 'react';
-import * as searchService from '~/apiServices/searchService'
+import * as searchService from '~/services/searchService'
 import { faCircleXmark, faSpinner,faSearch, faSignIn, faEllipsisVertical, faEarthAsia, faQuestion, faKeyboard, faCloudArrowUp, faMessage, faUser, faCoins, faGear, faArrowCircleRight, faSignOut } from '@fortawesome/free-solid-svg-icons';
 import HeadlessTippy from '@tippyjs/react/headless'; // different import path!s
 import AccountItem from '~/components/AccountItem';
