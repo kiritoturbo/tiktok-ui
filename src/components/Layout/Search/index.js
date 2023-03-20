@@ -74,56 +74,60 @@ function Search() {
 
     },[debounced])
     return ( 
+        //thêm thẻ div để tránh warnning của tippy
+    <div>
         <HeadlessTippy
-        interactive
-        visible={showResults && searchResult.length > 0}
-        render={(attrs)=>(
-            <div className={cx('search-result')} tabIndex="-1" {...attrs}>
-                    <PopperWrapper>
-                        <h4 className={cx('search-title')}>
-                            Accounts
-                        </h4>
-                        {searchResult.map(result=>(
-                            <AccountItem key={result.id} data={result}/>
-                        ))}
-                        
-                    </PopperWrapper>
-                </div>
-        )}
-        onClickOutside={handleHideResults}
-   >
-        <div className={cx('search')}>
-            <input  
-                ref={inputRef}
-                value={searchValue}
-                placeholder='Search accounts and videos ' 
-                spellCheck={false} 
-                onChange={(e)=>{
-                    if(e.target.value.startsWith(' ')){//ngăn ko cho người dùng nhập phím cách đầu tiên
-                        setSearchValue('')
-                    }else{
-                        setSearchValue(e.target.value)
-                    }
-                }}
-                onFocus={()=>setShowResults(true)}
-            />
-            {!!searchValue && !loading && (
-                <button className={cx('clear')} onClick={handleClear}>
-                    <FontAwesomeIcon icon={faCircleXmark} />
-                </button>
+            appendTo={()=>document.body}
+            interactive
+            visible={showResults && searchResult.length > 0}
+            render={(attrs)=>(
+                <div className={cx('search-result')} tabIndex="-1" {...attrs}>
+                        <PopperWrapper>
+                            <h4 className={cx('search-title')}>
+                                Accounts
+                            </h4>
+                            {searchResult.map(result=>(
+                                <AccountItem key={result.id} data={result}/>
+                            ))}
+                            
+                        </PopperWrapper>
+                    </div>
             )}
-
-            {loading && <FontAwesomeIcon icon={faSpinner} className={cx('loading')} />}
-            {/* loading  */}
-
-            
-            <button className={cx('search-btn')} onMouseDown={e=>e.preventDefault()}>
-                {/* search  */}
-                <FontAwesomeIcon icon={faSearch} />
-            </button>
-        </div>
-   </HeadlessTippy>
-     );
+            onClickOutside={handleHideResults}
+       >
+            <div className={cx('search')}>
+                <input  
+                    ref={inputRef}
+                    value={searchValue}
+                    placeholder='Search accounts and videos ' 
+                    spellCheck={false} 
+                    onChange={(e)=>{
+                        if(e.target.value.startsWith(' ')){//ngăn ko cho người dùng nhập phím cách đầu tiên
+                            setSearchValue('')
+                        }else{
+                            setSearchValue(e.target.value)
+                        }
+                    }}
+                    onFocus={()=>setShowResults(true)}
+                />
+                {!!searchValue && !loading && (
+                    <button className={cx('clear')} onClick={handleClear}>
+                        <FontAwesomeIcon icon={faCircleXmark} />
+                    </button>
+                )}
+    
+                {loading && <FontAwesomeIcon icon={faSpinner} className={cx('loading')} />}
+                {/* loading  */}
+    
+                
+                <button className={cx('search-btn')} onMouseDown={e=>e.preventDefault()}>
+                    {/* search  */}
+                    <FontAwesomeIcon icon={faSearch} />
+                </button>
+            </div>
+       </HeadlessTippy>
+    </div>
+    );
 }
 
 export default Search;

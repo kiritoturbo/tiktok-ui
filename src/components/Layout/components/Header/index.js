@@ -77,6 +77,104 @@ const MENU_ITEMS=[
                     code:'en',
                     title:'English3',
                 },
+                {
+                    type:'language',
+                    code:'en',
+                    title:'English',
+                    
+                },
+                {
+                    type:'language',
+                    code:'vi',
+                    title:'Tiếng Việt',
+                    children:{
+                        title:'Language',
+                        data:[
+                            {
+                                code:'en',
+                                title:'English11111',
+                                
+                            },
+                            {
+                                code:'vi',
+                                title:'Tiếng Việt111111',
+                            },
+                            {
+                                code:'en ',
+                                title:'English11111',
+                            },
+                            {
+                                code:'en',
+                                title:'English211111',
+                            },
+                            {
+                                code:'en',
+                                title:'English3111111',
+                            },
+                        ]
+                    }
+                },
+                {
+                    code:'en ',
+                    title:'English1',
+                },
+                {
+                    code:'en',
+                    title:'English2',
+                },
+                {
+                    code:'en',
+                    title:'English3',
+                },
+                {
+                    type:'language',
+                    code:'en',
+                    title:'English',
+                    
+                },
+                {
+                    type:'language',
+                    code:'vi',
+                    title:'Tiếng Việt',
+                    children:{
+                        title:'Language',
+                        data:[
+                            {
+                                code:'en',
+                                title:'English11111',
+                                
+                            },
+                            {
+                                code:'vi',
+                                title:'Tiếng Việt111111',
+                            },
+                            {
+                                code:'en ',
+                                title:'English11111',
+                            },
+                            {
+                                code:'en',
+                                title:'English211111',
+                            },
+                            {
+                                code:'en',
+                                title:'English3111111',
+                            },
+                        ]
+                    }
+                },
+                {
+                    code:'en ',
+                    title:'English1',
+                },
+                {
+                    code:'en',
+                    title:'English2',
+                },
+                {
+                    code:'en',
+                    title:'English3',
+                },
             ]
         }
     },
