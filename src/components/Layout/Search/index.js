@@ -1,6 +1,6 @@
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import { useEffect, useState, useRef } from 'react';
-
+import * as searchService from '~/apiServices/searchService'
 import { faCircleXmark, faSpinner,faSearch, faSignIn, faEllipsisVertical, faEarthAsia, faQuestion, faKeyboard, faCloudArrowUp, faMessage, faUser, faCoins, faGear, faArrowCircleRight, faSignOut } from '@fortawesome/free-solid-svg-icons';
 import HeadlessTippy from '@tippyjs/react/headless'; // different import path!s
 import AccountItem from '~/components/AccountItem';
@@ -33,7 +33,9 @@ function Search() {
     }
 
     const handleClear=()=>{
-        setSearchValue(' ')
+        // setSearchValue(' ') //làm trống ô text
+                    // inputRef.current.focus();//focus trong ô input
+        setSearchValue('')
         setSearchResult([])
         inputRef.current.focus();
     }
@@ -48,18 +50,22 @@ function Search() {
 
             return
         }
-        setLoading(true)
-        fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debounced)}&type=less`)
-        //encodeURIComponent để mã hóa kí từ nhập vào để ko bị trùng vs kí tự bên backend ví dụ như ?,=
-            .then((res)=>res.json())
-            .then(res=>{
-                setSearchResult(res.data);
-                setLoading(false)
+        
 
-            })
-            .catch(()=>{
-                setLoading(false)
-            })
+        const fetchApi =async ()=>{
+            setLoading(true)
+
+            const result=await searchService.search(debounced);
+            setSearchResult(result)
+
+            setLoading(false)
+
+        }
+        fetchApi();
+
+
+        
+        
 
 
     },[debounced])
@@ -98,11 +104,7 @@ function Search() {
                 onFocus={()=>setShowResults(true)}
             />
             {!!searchValue && !loading && (
-                <button className={cx('clear')} onClick={()=>{
-                    // setSearchValue(' ') //làm trống ô text
-                    // inputRef.current.focus();//focus trong ô input
-                    handleClear()
-                }}>
+                <button className={cx('clear')} onClick={handleClear}>
                     <FontAwesomeIcon icon={faCircleXmark} />
                 </button>
             )}
