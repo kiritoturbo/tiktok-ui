@@ -28,14 +28,18 @@ function Menu({children,items=[],hideOnClick=false,onChange=defaultFn}) {
 
             return <MenuItem key={index} data={item} onClick={()=>{
                 if(isParent){
-                    setHistory(prev=>[...prev, item.children]);
+                    setHistory(prev=>[...prev, item.children]);//nextPage
                 }
                 else{
-                    onChange(item);
+                    onChange(item);//onchange
                 }
             }} />
         }
         )
+    }
+
+    const handleResetToFristPage=()=>{
+        setHistory(prev=>prev.slice(0,1))
     }
     return ( 
         <Tippy
@@ -60,7 +64,7 @@ function Menu({children,items=[],hideOnClick=false,onChange=defaultFn}) {
                         </PopperWrapper>
                     </div>
             )}
-            onHide={()=>setHistory(prev=>prev.slice(0,1))}
+            onHide={handleResetToFristPage}
         >
 
             {children}

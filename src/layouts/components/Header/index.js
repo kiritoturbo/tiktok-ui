@@ -294,7 +294,7 @@ function Header() {
                         // outline className={cx('custom-login')}
                         // small
                         // large
-                        // to='/login'
+                        to='/login'
                         // href='https://www.tiktok.com/'
                         // target='_blank'
                         // onClick={()=>alert("Thành công")}
