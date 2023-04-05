@@ -1,0 +1,38 @@
+.menu-item {
+  display: flex;
+  font-size: 1.8rem;
+  font-weight: 700;
+  align-items: center;
+  padding: 8px;
+  color: var(--text-color);
+  border-radius: 4px;
+  transition: background-color ease-in-out 200ms;
+}
+.menu-item.active {
+  color: var(--primary-color);
+}
+.menu-item.active .icon {
+  display: none;
+}
+.menu-item.active .active-icon {
+  display: flex;
+}
+.menu-item:hover {
+  background-color: rgba(22, 24, 35, 0.03);
+}
+
+.title {
+  margin-left: 10px;
+}
+
+.icon, .active-icon {
+  display: flex;
+}
+
+.active {
+  color: var(--primary-color);
+}
+
+.active-icon {
+  display: none;
+}/*# sourceMappingURL=Menu.module.css.map */

@@ -1,9 +1,13 @@
-import { Fragment } from 'react';//chỉ để chứa chứ ko sinh ra thẻ thật
+import { Fragment,useEffect,useState } from 'react';//chỉ để chứa chứ ko sinh ra thẻ thật
 import {BrowserRouter as Router,Routes,Route} from 'react-router-dom'
 import { publicRoutes  } from './routes';
 import {DefaultLayout} from '~/layouts';
 
+
+
 function App() {
+  
+    
   return (
     <Router>
       <div className="App">
